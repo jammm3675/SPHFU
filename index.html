@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .schedule {
+            margin-top: 20px;
+        }
+        .schedule-item {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Timetable</h1>
+    <form id="scheduleForm">
+        <input type="text" id="day" placeholder="Day of the week" required>
+        <input type="text" id="time" placeholder="Time" required>
+        <input type="text" id="subject" placeholder="Subject" required>
+        <button type="submit">Add</button>
+    </form>
+    <div class="schedule" id="schedule"></div>
 
+    <script>
+        const scheduleForm = document.getElementById('scheduleForm');
+        const scheduleDiv = document.getElementById('schedule');
+        let schedule = {};
+
+        scheduleForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const day = document.getElementById('day').value;
+            const time = document.getElementById('time').value;
+            const subject = document.getElementById('subject').value;
+
+            if (!schedule[day]) {
+                schedule[day] = [];
+            }
+            schedule[day].push({ time, subject });
+            updateSchedule();
+
+            document.getElementById('day').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('subject').value = '';
+        });
+
+        function updateSchedule() {
+            scheduleDiv.innerHTML = '';
+            for (const day in schedule) {
+                const daySchedule = schedule[day];
+                daySchedule.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'schedule-item';
+                    div.textContent = `${day} ${item.time} - ${item.subject}`;
+                    scheduleDiv.appendChild(div);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
