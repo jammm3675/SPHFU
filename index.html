@@ -1,75 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Timetable</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        .schedule {
-            margin-top: 20px;
-        }
-        .schedule-item {
-            background: #fff;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <title>PolyNavi</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Class Timetable</h1>
-    <form id="scheduleForm">
-        <input type="text" id="day" placeholder="Day of the week" required>
-        <input type="text" id="time" placeholder="Time" required>
-        <input type="text" id="subject" placeholder="Subject" required>
-        <button type="submit">Add</button>
-    </form>
-    <div class="schedule" id="schedule"></div>
+    <!-- Навигация -->
+    <nav class="sidebar">
+        <h2>POLYNAVI</h2>
+        <ul>
+            <li><button onclick="showBuildingMap()">Главное здание</button></li>
+            <li><button onclick="showCampus()">Корпуса</button></li>
+            <li><button onclick="showSchedule()">Расписание</button></li>
+            <li><button onclick="showSettings()">Настройки</button></li>
+        </ul>
+    </nav>
 
-    <script>
-        const scheduleForm = document.getElementById('scheduleForm');
-        const scheduleDiv = document.getElementById('schedule');
-        let schedule = {};
+    <!-- Основное содержимое -->
+    <main id="content">
+        <!-- Карта здания -->
+        <div id="building-map" class="hidden">
+            <h3>Главное здание</h3>
+            <input type="text" placeholder="Откуда" id="from">
+            <input type="text" placeholder="Куда" id="to">
+            <button onclick="findPath()">Найти путь</button>
+            <img src="map.jpg" alt="Карта главного здания">
+        </div>
 
-        scheduleForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        <!-- Расписание -->
+        <div id="schedule" class="hidden">
+            <h3>Расписание</h3>
+            <div>
+                <button onclick="filterSchedule('week1')">1 неделя</button>
+                <button onclick="filterSchedule('week2')">2 неделя</button>
+            </div>
+            <ul id="schedule-list">
+                <li>Высшая математика: Оханцева Ирина Владимировна, каб. 284</li>
+                <li>Анатомия: Постникова Татьяна Юрьевна, каб. 106</li>
+                <li>Численные методы: Музалевский Алексей Витальевич, 209 МФ</li>
+            </ul>
+        </div>
 
-            const day = document.getElementById('day').value;
-            const time = document.getElementById('time').value;
-            const subject = document.getElementById('subject').value;
+        <!-- Список групп -->
+        <div id="groups" class="hidden">
+            <h3>Список групп</h3>
+            <div>
+                <button onclick="filterGroups('bachelors')">Бакалавры</button>
+                <button onclick="filterGroups('masters')">Магистры</button>
+            </div>
+            <ul id="groups-list">
+                <li>4731204/30001</li>
+                <li>4731901/40001</li>
+                <li>4731904/40001</li>
+            </ul>
+        </div>
 
-            if (!schedule[day]) {
-                schedule[day] = [];
-            }
-            schedule[day].push({ time, subject });
-            updateSchedule();
+        <!-- Настройки -->
+        <div id="settings" class="hidden">
+            <h3>Настройки</h3>
+            <!-- Настройки пользователя и приложения -->
+        </div>
+    </main>
 
-            document.getElementById('day').value = '';
-            document.getElementById('time').value = '';
-            document.getElementById('subject').value = '';
-        });
-
-        function updateSchedule() {
-            scheduleDiv.innerHTML = '';
-            for (const day in schedule) {
-                const daySchedule = schedule[day];
-                daySchedule.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'schedule-item';
-                    div.textContent = `${day} ${item.time} - ${item.subject}`;
-                    scheduleDiv.appendChild(div);
-                });
-            }
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
