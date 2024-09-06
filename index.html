@@ -9,10 +9,10 @@
 <body>
     <!-- Навигация -->
     <nav class="sidebar">
-        <h2>POLYNAVI</h2>
+        <h2>СПХФУ</h2>
         <ul>
-            <li><button onclick="showBuildingMap()">Главное здание</button></li>
-            <li><button onclick="showCampus()">Корпуса</button></li>
+            <li><button onclick="showBuildingMap()">Карта корпусов</button></li>
+            <li><button onclick="showCampus()">Курс</button></li>
             <li><button onclick="showSchedule()">Расписание</button></li>
             <li><button onclick="showSettings()">Настройки</button></li>
         </ul>
@@ -22,7 +22,7 @@
     <main id="content">
         <!-- Карта здания -->
         <div id="building-map" class="hidden">
-            <h3>Главное здание</h3>
+            <h3>Карта корпусов</h3>
             <input type="text" placeholder="Откуда" id="from">
             <input type="text" placeholder="Куда" id="to">
             <button onclick="findPath()">Найти путь</button>
@@ -37,9 +37,9 @@
                 <button onclick="filterSchedule('week2')">2 неделя</button>
             </div>
             <ul id="schedule-list">
-                <li>Высшая математика: Оханцева Ирина Владимировна, каб. 284</li>
-                <li>Анатомия: Постникова Татьяна Юрьевна, каб. 106</li>
-                <li>Численные методы: Музалевский Алексей Витальевич, 209 МФ</li>
+                <li>Математика: Васильев Василий Васильевич, каб. 21</li>
+                <li>Химия: Александров Александр Александрович, каб. 12</li>
+                <li>Русский: Царь Иван Грозный, каб. 23</li>
             </ul>
         </div>
 
@@ -51,9 +51,9 @@
                 <button onclick="filterGroups('masters')">Магистры</button>
             </div>
             <ul id="groups-list">
-                <li>4731204/30001</li>
-                <li>4731901/40001</li>
-                <li>4731904/40001</li>
+                <li>ТБ-1831</li>
+                <li>ТБ-1832</li>
+                <li>ТБ-1833</li>
             </ul>
         </div>
 
